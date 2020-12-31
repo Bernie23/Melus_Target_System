@@ -10,14 +10,15 @@ spi = spidev.SpiDev(0,0)
 
 spi.max_speed_hz = 8000000
 spi.mode = 0
+spi.bits_per_word = 8
 
-def read_adc(adc_ch, vref = 3.3):
-    msg = 0b11
-    msg = ((msg << 1) + adc_ch) << 5
-    msg = [msg, 0b00000000]
-    reply = spi.xfer2(msg)
+def read_adc(vref = 2.5):
+    msg = [0xC0, 0x00, 0xC0, 0x00]
+    reply = spi.xfer3(msg)
     
     # Construct a single integer out of the reply
+    for number in reply:
+        print(bin(number))
     adc = 0
     for n in reply:
         adc = (adc << 8) + n
@@ -25,11 +26,11 @@ def read_adc(adc_ch, vref = 3.3):
     # Shift to remove the last vaue
     adc = adc >> 1
     
-    voltage = (vref*adc)/1024
+    voltage = (vref*adc)/4096
     
     return voltage
 
 
 while True:
-    adc_0 = read_adc(0)
-    adc_1 = read_adc(1)
+    adc_0 = read_adc()
+    time.sleep(5)
