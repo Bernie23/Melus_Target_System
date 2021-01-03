@@ -178,3 +178,8 @@ int SpiWriteAndRead (int SpiDevice, unsigned char *TxData, unsigned char *RxData
 
     return retVal;
 }
+
+int main(void)
+{
+    return 0;
+}

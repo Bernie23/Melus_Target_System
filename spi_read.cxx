@@ -5,6 +5,7 @@
 
 
 #include <iostream>
+<<<<<<< HEAD
 #include <stdio.h>
 #include <stdlib.h>
 #include <string>
@@ -161,6 +162,13 @@ int main(void)
 {
 	SpiOpenPort(0);
 	SpiWriteAndRead(0, TxData = "0x80");
+=======
+#include <spi_ads7861>
+
+int main(int argc, char **argv)
+{
+	SpiOpenPort(0);
+>>>>>>> 621da7ddbdec9275f521bd39eee661856ee4e565
 	return 0;
 }
 
