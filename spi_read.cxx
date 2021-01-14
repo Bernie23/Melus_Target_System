@@ -41,9 +41,13 @@ int SpiOpenPort(int spi_device)
     spi_speed = 8000000;		//8MHz (.125uS per bit)
 	
 	if(spi_device)
+	{
     	spi_cs_fd = &spi_cs1_fd;
+    }
     else
-    	spi_cs_fd = &spi_cs0_fd;
+    {
+		spi_cs_fd = &spi_cs0_fd;
+	}
 	
 	if(spi_device)
     	*spi_cs_fd = open("/dev/spidev0.1", O_RDWR);
@@ -160,10 +164,10 @@ int SpiWriteAndRead (int SpiDevice, unsigned char *TxData, unsigned char *RxData
 int main(void)
 {
 	unsigned char TxData = 128;
-	unsigned char RxData;
+	//unsigned char RxData;
 	SpiOpenPort(0);
-	SpiWriteAndRead(0, TxData, RxData, 8, 0);
-	printf(RxData);
+	//SpiWriteAndRead(0, TxData, RxData, 8, 0);
+	//printf(RxData);
 	return 0;
 }
 
